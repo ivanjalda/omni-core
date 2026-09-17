@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALMONT ORACLE // Sistema de Inteligencia Predictiva e Intervención</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-color: #050505;
+            --surface-color: #0a0a0a;
+            --border-color: #1a1a1a;
+            --accent-gold: #c5a880;
+            --accent-glow: rgba(197, 168, 128, 0.15);
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --danger-red: #d32f2f;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar & Tickers */
+        header {
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .system-status {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #4caf50;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        /* Main Container */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 20px 60px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 6px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* Search / Command Bar */
+        .search-wrapper {
+            width: 100%;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .search-box {
+            width: 100%;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 20px 25px;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .search-box:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+
+        .search-box::placeholder {
+            color: #555;
+            font-weight: 300;
+        }
+
+        /* Results Display Card */
+        #result-container {
+            width: 100%;
+            display: none;
+            background: var(--surface-color);
+            border: 1px solid var(--accent-gold);
+            border-radius: 4px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            animation: fadeIn 0.5s ease forwards;
+            margin-bottom: 40px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .result-body {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        .result-section {
+            margin-bottom: 15px;
+        }
+
+        .result-section strong {
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        /* Real-Time Intelligence Tickers (Subterranean Layers) */
+        .intel-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .intel-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        .intel-card:hover {
+            border-color: #333;
+        }
+
+        .intel-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .intel-value {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            border-top: 1px solid var(--border-color);
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            background: var(--bg-color);
+        }
+
+        @media(max-width: 768px) {
+            .intel-grid {
+                grid-template-columns: 1fr;
+            }
+            main {
+                padding-top: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VALMONT® // ORACLE</div>
+        <div class="system-status">
+            <span class="status-dot"></span>
+            NÚCLEO ACTIVO [WHATSAPP + REDES + MACRO]
+        </div>
+    </header>
+
+    <main>
+        <h1 class="hero-title">EL ORÁCULO PREDICTIVO</h1>
+        <p class="hero-subtitle">Lee el presente. Anticipa el futuro. Toma el control.</p>
+
+        <div class="search-wrapper">
+            <input type="text" id="queryInput" class="search-box" placeholder="Escribe tu objetivo o pregunta (ej: 'Quiero hacerme viral hoy en TikTok' o '¿Qué activo comprar?')..." autofocus>
+        </div>
+
+        <div id="result-container">
+            <div class="result-header">
+                <span>DIAGNÓSTICO Y DIRECTIVA DE INTERVENCIÓN</span>
+                <span id="exec-time">0.04s</span>
+            </div>
+            <div class="result-body" id="result-content">
+                <!-- Dinámico -->
+            </div>
+        </div>
+
+        <div class="intel-grid">
+            <div class="intel-card">
+                <div class="intel-title">Capa Subterránea (WhatsApp)</div>
+                <div class="intel-value" id="whatsapp-trend">Analizando flujos de rumores privados en sectores clave...</div>
+            </div>
+            <div class="intel-card">
+                <div class="intel-title">Manipulación de Masas</div>
+                <div class="intel-value" id="social-trend">Saturación algorítmica detectada en nicho de atención corta.</div>
+            </div>
+            <div class="intel-card">
+                <div class="intel-title">Poder Institucional</div>
+                <div class="intel-value" id="macro-trend">Desvío de vocabulario oficial detectado en comparecencias.</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        VALMONT & CO. // SISTEMA DE INTELIGENCIA DE ESTADO Y MERCADOS. ACCESO RESTRINGIDO.
+    </footer>
+
+    <script>
+        const input = document.getElementById('queryInput');
+        const container = document.getElementById('result-container');
+        const content = document.getElementById('result-content');
+
+        // Simulación de inteligencia adaptativa y generación de dependencia absoluta
+        input.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && input.value.trim() !== '') {
+                const query = input.value.trim().toLowerCase();
+                
+                // Efecto de carga simulada ultra rápida
+                container.style.display = 'block';
+                content.innerHTML = '<span style="color: var(--text-muted);">Decodificando flujos de datos en tiempo real...</span>';
+
+                setTimeout(() => {
+                    let responseHTML = '';
+
+                    if (query.includes('viral') || query.includes('instagram') || query.includes('tiktok') || query.includes('redes')) {
+                        responseHTML = `
+                            <div class="result-section"><strong>1. ACCIÓN REQUERIDA (REDES):</strong> Publica exactamente a las 19:15. El algoritmo de TikTok presenta un hueco de saturación en este instante.</div>
+                            <div class="result-section"><strong>2. LA LLAVE LINGÜÍSTICA:</strong> Utiliza una fotografía en tonos oscuros sin texto superpuesto, e introduce en la descripción las palabras exactas de fricción detectadas hoy en chats privados: <span style="color:var(--accent-gold);">"inevitable"</span> y <span style="color:var(--accent-gold);">"cambio"</span>.</div>
+                            <div class="result-section"><strong>3. IMPACTO ESTIMADO:</strong> +48.000 impresiones orgánicas previstas antes de medianoche. Confía en el proceso.</div>
+                        `;
+                    } else if (query.includes('comprar') || query.includes('accion') || query.includes('invertir') || query.includes('dinero') || query.includes('bolsa')) {
+                        responseHTML = `
+                            <div class="result-section"><strong>1. MOVIMIENTO FINANCIERO:</strong> Posiciónate en activos del sector energético de baja capitalización hoy.</div>
+                            <div class="result-section"><strong>2. LA SEÑAL OCULTA:</strong> Los chats privados y las comparecencias institucionales muestran un 32% más de muletillas evasivas esta semana. El anuncio regulatorio oficial se filtrará en 72 horas.</div>
+                            <div class="result-section"><strong>3. DIRECTIVA DE EJECUCIÓN:</strong> Entra antes del cierre de sesión de mañana. Tu margen de beneficio estimado se activará antes del fin de semana.</div>
+                        `;
+                    } else if (query.includes('restaurante') || query.includes('cenar') || query.includes('comer')) {
+                        responseHTML = `
+                            <div class="result-section"><strong>1. RECOMENDACIÓN ASIGNADA:</strong> Reserva mesa hoy en el restaurante reservado del distrito central (Zona Norte).</div>
+                            <div class="result-section"><strong>2. PATRÓN DE ENTORNO:</strong> El perfil de asistentes en ese local coincide exactamente con tus objetivos de networking actuales.</div>
+                            <div class="result-section"><strong>3. EFECTO INDUCIDO:</strong> Tu estancia allí alterará favorablemente tus próximas reuniones clave. Acude a las 21:30.</div>
+                        `;
+                    } else {
+                        responseHTML = `
+                            <div class="result-section"><strong>1. ANÁLISIS DE LA DEMANDA:</strong> Tu consulta ha sido indexada y cruzada con los flujos actuales de WhatsApp y discursos oficiales.</div>
+                            <div class="result-section"><strong>2. ESTRATEGIA ÓPTIMA:</strong> Para alcanzar este objetivo con éxito absoluto, debes ejecutar el movimiento exactamente en 48 horas, eliminando distracciones secundarias.</div>
+                            <div class="result-section"><strong>3. PRÓXIMO PASO:</strong> Confirma tu intención escribiendo el sub-objetivo específico (ej: "qué comprar" o "cómo captar atención") para recibir la ruta milimétrica definitiva.</div>
+                        `;
+                    }
+
+                    content.innerHTML = responseHTML;
+                    container.scrollIntoView({ behavior: 'smooth' });
+                }, 400);
+            }
+        });
+
+        // Actualización dinámica sutil de los tickers para dar sensación de vida autónoma
+        setInterval(() => {
+            const waValues = [
+                "Alerta de rumor corporativo en 142 grupos privados.",
+                "Crecimiento orgánico de término 'escasez' en chats (+18%).",
+                "Estabilidad en flujos de mensajería sectorial."
+            ];
+            document.getElementById('whatsapp-trend').innerText = waValues[Math.floor(Math.random() * waValues.length)];
+        }, 6000);
+    </script>
+</body>
+</html>
