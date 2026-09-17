@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VALMONT // ORACLE</title>
+    <title>VALMONT // LINGUA HACK</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #050505;
@@ -19,6 +19,7 @@
             --accent-gold: #c5a059;
             --accent-glow: rgba(197, 160, 89, 0.15);
             --success-green: #2ecc71;
+            --danger-red: #e74c3c;
         }
 
         * {
@@ -35,10 +36,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            overflow-x: hidden;
         }
 
-        /* Cabecera Superior Estilo HUD */
         header {
             display: flex;
             justify-content: space-between;
@@ -84,143 +83,160 @@
             100% { opacity: 0.4; }
         }
 
-        /* Contenedor Principal */
         main {
             flex: 1;
-            max-width: 1000px;
+            max-width: 900px;
             width: 100%;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            gap: 30px;
         }
 
-        .oracle-header {
+        .section-title {
             text-align: center;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
-            letter-spacing: 0.25em;
+            font-size: 2rem;
+            letter-spacing: 0.2em;
             color: #ffffff;
             font-weight: 400;
         }
 
         .subtitle {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             letter-spacing: 0.2em;
             text-transform: uppercase;
         }
 
-        /* Consola de Entrada de Consulta */
-        .console-box {
-            position: relative;
-            width: 100%;
+        /* Selector de Idiomas / Módulos */
+        .selector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
         }
 
-        .console-input {
-            width: 100%;
+        .lang-btn {
             background: var(--bg-panel);
             border: 1px solid var(--border-subtle);
-            color: #ffffff;
-            padding: 20px 24px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
-            letter-spacing: 0.05em;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .console-input:focus {
-            border-color: var(--accent-gold);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        /* Panel Principal de Diagnóstico */
-        .diagnostic-panel {
-            background: var(--bg-panel);
-            border: 1px solid var(--border-subtle);
-            position: relative;
-            transition: all 0.4s ease;
-        }
-
-        .diagnostic-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 25px;
-            border-bottom: 1px solid var(--border-subtle);
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
             color: var(--text-muted);
+            padding: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
             text-transform: uppercase;
         }
 
-        .diagnostic-content {
-            padding: 30px;
+        .lang-btn:hover, .lang-btn.active {
+            border-color: var(--accent-gold);
+            color: #ffffff;
+            background: var(--bg-card);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Consola de Estímulo Subconsciente (El Hack) */
+        .stimulus-box {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            padding: 40px;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 250px;
+            position: relative;
             gap: 20px;
         }
 
-        .diagnostic-content p {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: #d0d0d0;
-        }
-
-        .diagnostic-content strong {
-            color: var(--accent-gold);
+        .target-phrase {
+            font-size: 1.8rem;
+            color: #ffffff;
+            letter-spacing: 0.05em;
             font-weight: 500;
         }
 
-        /* Cuadrícula de Capas Secundarias */
-        .grid-layers {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .layer-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .layer-card:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-        }
-
-        .layer-title {
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-            color: var(--text-muted);
+        .translation-phrase {
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            letter-spacing: 0.1em;
             text-transform: uppercase;
         }
 
-        .layer-desc {
-            font-size: 0.85rem;
-            color: #b0b0b0;
-            line-height: 1.4;
+        .cycle-counter {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
         }
 
-        /* Pie de página */
+        /* Controles de Reproducción */
+        .control-panel {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .action-btn {
+            background: var(--accent-gold);
+            color: var(--bg-deep);
+            border: none;
+            padding: 15px 35px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: #d4af37;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .action-btn.secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .action-btn.secondary:hover {
+            border-color: var(--accent-gold);
+        }
+
+        /* Barra de Progreso Neural */
+        .progress-track {
+            width: 100%;
+            height: 3px;
+            background: var(--border-subtle);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-gold);
+            transition: width 0.5s linear;
+        }
+
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 25px;
             border-top: 1px solid var(--border-subtle);
             font-size: 0.7rem;
             letter-spacing: 0.2em;
@@ -230,14 +246,11 @@
         }
 
         @media (max-width: 768px) {
-            .grid-layers {
+            .selector-grid {
                 grid-template-columns: 1fr;
             }
-            header {
-                padding: 20px;
-            }
-            main {
-                padding: 30px 15px;
+            .target-phrase {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -245,115 +258,131 @@
 <body>
 
     <header>
-        <div class="brand">VALMONT // ORACLE</div>
+        <div class="brand">VALMONT // LINGUA HACK</div>
         <div class="system-status">
             <span class="status-dot"></span>
-            NÚCLEO ACTIVO [WHATSAPP + REDES + MACRO]
+            MOTOR DE REPETICIÓN ACTIVO
         </div>
     </header>
 
     <main>
-        <div class="oracle-header">
-            <h1>EL ORÁCULO PREDICTIVO</h1>
-            <div class="subtitle">Lee el presente. Anticipa el futuro. Toma el control.</div>
+        <div class="section-title">
+            <h1>INMERSIÓN NEURONAL</h1>
+            <div class="subtitle">Saturación rítmica para fijación subconsciente de patrones lingüísticos</div>
         </div>
 
-        <div class="console-box">
-            <input type="text" id="queryInput" class="console-input" placeholder="Escribe un vector, nodo o consulta (ej: redes sociales, finanzas, expansión)..." value="redes sociales">
+        <div class="selector-grid">
+            <button class="lang-btn active" onclick="setLanguage('portugues')">Português (UNED / Avanzado)</button>
+            <button class="lang-btn" onclick="setLanguage('ingles')">English (Técnico / Negocios)</button>
+            <button class="lang-btn" onclick="setLanguage('ruso')">Русский (Estructuras Clave)</button>
         </div>
 
-        <div class="diagnostic-panel">
-            <div class="diagnostic-header">
-                <span id="panelTitle">DIAGNÓSTICO Y DIRECTIVA DE INTERVENCIÓN</span>
-                <span id="latencyTimer" style="color: var(--accent-gold);">0.03S</span>
-            </div>
-            <div class="diagnostic-content" id="diagnosticBody">
-                <p><strong>1. ACCIÓN REQUERIDA (REDES):</strong> Publica exactamente a las 19:15. El algoritmo de TikTok presenta un hueco de saturación en este instante.</p>
-                <p><strong>2. LA LLAVE LINGÜÍSTICA:</strong> Utiliza una fotografía en tonos oscuros sin texto superpuesto, e introduce en la descripción las palabras exactas de fricción detectadas hoy en chats privados: "inevitable" y "cambio".</p>
-                <p><strong>3. IMPACTO ESTIMADO:</strong> +48.000 impresiones orgánicas previstas antes de medianoche. Confía en el proceso.</p>
-            </div>
+        <div class="stimulus-box">
+            <div class="cycle-counter" id="cycleCounter">ESTÍMULO: 01 / 05</div>
+            <div class="target-phrase" id="targetPhrase">"A persistência é o único caminho viável para o domínio absoluto."</div>
+            <div class="translation-phrase" id="translationPhrase">La persistencia es el único camino viable para el dominio absoluto.</div>
         </div>
 
-        <div class="grid-layers">
-            <div class="layer-card" onclick="switchContext('whatsapp')">
-                <div class="layer-title">Capa Subterránea (WhatsApp)</div>
-                <div class="layer-desc">Crecimiento orgánico de término 'escasez' en chats (+18%).</div>
-            </div>
-            <div class="layer-card" onclick="switchContext('masas')">
-                <div class="layer-title">Manipulación de Masas</div>
-                <div class="layer-desc">Saturación algorítmica detectada en nicho de atención corta.</div>
-            </div>
-            <div class="layer-card" onclick="switchContext('institucional')">
-                <div class="layer-title">Poder Institucional</div>
-                <div class="layer-desc">Desvío de vocabulario oficial detectado en comparecencias.</div>
-            </div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="control-panel">
+            <button class="action-btn" id="toggleBtn" onclick="toggleEngine()">INICIAR CICLO</button>
+            <button class="action-btn secondary" onclick="nextStimulus()">SALTAR ESTÍMULO</button>
         </div>
     </main>
 
     <footer>
-        VALMONT & CO. // SISTEMA DE INTELIGENCIA DE ESTADO Y MERCADOS. ACCESO RESTRINGIDO.
+        VALMONT & CO. // SISTEMA DE HACKEO COGNITIVO. USO EXCLUSIVO.
     </footer>
 
     <script>
-        const database = {
-            "redes sociales": {
-                title: "DIAGNÓSTICO Y DIRECTIVA DE INTERVENCIÓN",
-                p1: "<strong>1. ACCIÓN REQUERIDA (REDES):</strong> Publica exactamente a las 19:15. El algoritmo de TikTok presenta un hueco de saturación en este instante.",
-                p2: "<strong>2. LA LLAVE LINGÜÍSTICA:</strong> Utiliza una fotografía en tonos oscuros sin texto superpuesto, e introduce en la descripción las palabras exactas de fricción detectadas hoy en chats privados: 'inevitable' y 'cambio'.",
-                p3: "<strong>3. IMPACTO ESTIMADO:</strong> +48.000 impresiones orgánicas previstas antes de medianoche. Confía en el proceso."
-            },
-            "whatsapp": {
-                title: "ANÁLISIS DE CAPA SUBTERRÁNEA // WHATSAPP",
-                p1: "<strong>1. FLUJO DE TÉRMINOS:</strong> Alza masiva del concepto 'escasez' y 'protección de capital' en grupos cerrados de mensajería.",
-                p2: "<strong>2. PATRÓN COMPORTAMENTAL:</strong> El usuario promedio busca refugio ante la incertidumbre macroeconómica de los próximos ciclos.",
-                p3: "<strong>3. VENTANA DE OPORTUNIDAD:</strong> Posicionamiento directo de activos de valor y discursos de autoridad financiera."
-            },
-            "masas": {
-                title: "MATRIZ DE MANIPULACIÓN DE MASAS",
-                p1: "<strong>1. FATIGA COGNITIVA:</strong> Saturación algorítmica extrema en formatos de consumo inferior a 15 segundos.",
-                p2: "<strong>2. CONTRAPOSICIÓN:</strong> Oportunidad de impacto mediante piezas de alta densidad conceptual y estética sobria.",
-                p3: "<strong>3. EFECTO RETORNO:</strong> Retención de audiencia un 34% superior en perfiles que abandonan el ruido estridente."
-            },
-            "institucional": {
-                title: "MONITOREO DE PODER INSTITUCIONAL",
-                p1: "<strong>1. ANÁLISIS DISCURSIVO:</strong> Desvío sistemático del vocabulario oficial en comparecencias públicas recientes.",
-                p2: "<strong>2. SEÑAL OCULTA:</strong> Preparación de marcos regulatorios restrictivos bajo discursos de aparente optimismo.",
-                p3: "<strong>3. DIRECTIVA:</strong> Reestructuración preventiva de canales de difusión corporativos."
-            },
-            "finanzas": {
-                title: "NÚCLEO TÁCTICO FINANCIERO // VALMONT & CO",
-                p1: "<strong>1. LECTURA DE MERCADO:</strong> Volatilidad contenida en los índices principales antes del cierre trimestral.",
-                p2: "<strong>2. POSICIONAMIENTO:</strong> Acumulación silenciosa en activos de baja liquidez y alta asimetría.",
-                p3: "<strong>3. EJECUCIÓN:</strong> Sincronizar liberación de informes privados con los picos de atención institucional."
-            }
+        const datasets = {
+            portugues: [
+                { target: "A persistência é o único caminho viável para o domínio absoluto.", trans: "La persistencia es el único camino viable para el dominio absoluto." },
+                { target: "O conhecimento adquirido transforma-se em poder de execução.", trans: "El conocimiento adquirido se transforma en poder de ejecución." },
+                { target: "Não existe obstáculo intransponível para uma mente focalizada.", trans: "No existe obstáculo insuperable para una mente enfocada." },
+                { target: "Antecipar os movimentos do cenário é a chave da vantagem.", trans: "Anticipar los movimientos del escenario es la clave de la ventaja." },
+                { target: "A clareza de propósito elimina qualquer margem de erro.", trans: "La claridad de propósito elimina cualquier margen de error." }
+            ],
+            ingles: [
+                { target: "Execution speed separates visionaries from spectators.", trans: "La velocidad de ejecución separa a los visionarios de los espectadores." },
+                { target: "Capital protection dictates every strategic movement.", trans: "La protección de capital dicta cada movimiento estratégico." },
+                { target: "Algorithmic patterns reveal the structure of human behavior.", trans: "Los patrones algorítmicos revelan la estructura del comportamiento humano." },
+                { target: "Silence is the ultimate weapon in competitive positioning.", trans: "El silencio es el arma definitiva en el posicionamiento competitivo." },
+                { target: "Master the fundamental principles before seeking scale.", trans: "Domina los principios fundamentales antes de buscar escala." }
+            ],
+            ruso: [
+                { target: "Дисциплина превосходит любые природные способности.", trans: "La disciplina supera cualquier capacidad natural." },
+                { target: "Контроль над вниманием дает контроль над реальностью.", trans: "El control sobre la atención da control sobre la realidad." },
+                { target: "Тишина перед рывком определяет исход операции.", trans: "El silencio antes del impulso determina el resultado de la operación." },
+                { target: "Результат говорит сам за себя, слова не имеют ценности.", trans: "El resultado habla por sí mismo, las palabras no tienen valor." },
+                { target: "Стратегическое мышление требует абсолютной холоднокровности.", trans: "El pensamiento estratégico requiere absoluta frialdad." }
+            ]
         };
 
-        const input = document.getElementById('queryInput');
-        const body = document.getElementById('diagnosticBody');
-        const title = document.getElementById('panelTitle');
-        const timer = document.getElementById('latencyTimer');
+        let currentLang = 'portugues';
+        let currentIndex = 0;
+        let isRunning = false;
+        let intervalTimer = null;
 
-        function updateDisplay(key) {
-            const data = database[key.toLowerCase()] || {
-                title: "ANÁLISIS DE VECTOR DESCONOCIDO",
-                p1: `<strong>1. EVALUACIÓN:</strong> El término "${key}" está siendo procesado por el núcleo de Valmont.`,
-                p2: "<strong>2. DIRECTIVA:</strong> Refina el parámetro de búsqueda hacia nodos estructurados (redes sociales, whatsapp, masas, institucional, finanzas).",
-                p3: "<strong>3. ESTADO:</strong> Sistema en espera de directriz unificada."
-            };
+        const targetEl = document.getElementById('targetPhrase');
+        const transEl = document.getElementById('translationPhrase');
+        const counterEl = document.getElementById('cycleCounter');
+        const progressEl = document.getElementById('progressFill');
+        const toggleBtn = document.getElementById('toggleBtn');
 
-            title.innerText = data.title;
-            body.innerHTML = `<p>${data.p1}</p><p>${data.p2}</p><p>${data.p3}</p>`;
-            timer.innerText = (Math.random() * 0.05 + 0.01).toFixed(2) + 'S';
+        function setLanguage(lang) {
+            currentLang = lang;
+            currentIndex = 0;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            updateView();
+            if(isRunning) {
+                stopEngine();
+                toggleEngine();
+            }
         }
 
-        input.addEventListener('input', (e) => {
-            updateDisplay(e.target.value);
-        });
-
-        function switchContext(category) {
-            input.value = category;
-            updateDisplay(category);
+        function updateView() {
+            const data = datasets[currentLang][currentIndex];
+            targetEl.innerText = `"${data.target}"`;
+            transEl.innerText = data.trans;
+            counterEl.innerText = `ESTÍMULO: 0${currentIndex + 1} / 0${datasets[currentLang].length}`;
+            progressEl.style.width = `${((currentIndex + 1) / datasets[currentLang].length) * 100}%`;
         }
+
+        function nextStimulus() {
+            currentIndex = (currentIndex + 1) % datasets[currentLang].length;
+            updateView();
+        }
+
+        function toggleEngine() {
+            if (isRunning) {
+                stopEngine();
+            } else {
+                startEngine();
+            }
+        }
+
+        function startEngine() {
+            isRunning = true;
+            toggleBtn.innerText = "PAUSAR CICLO";
+            toggleBtn.style.background = "var(--danger-red)";
+            intervalTimer = setInterval(() => {
+                nextStimulus();
+            }, 4000); // Rota cada 4 segundos para saturación subconsciente óptima
+        }
+
+        function stopEngine() {
+            isRunning = false;
+            toggleBtn.innerText = "INICIAR CICLO";
+            toggleBtn.style.background = "var(--accent-gold)";
+            clearInterval(intervalTimer);
+        }
+
+        updateView();
     </script>
 </body>
 </html>
