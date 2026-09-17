@@ -3,31 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VALMONT ORACLE // Sistema de Inteligencia Predictiva e Intervención</title>
+    <title>VALMONT // ORACLE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        :root {
+            --bg-deep: #050505;
+            --bg-panel: #0a0a0a;
+            --bg-card: #0f0f0f;
+            --border-subtle: #222222;
+            --border-active: #c5a059;
+            --text-main: #e0e0e0;
+            --text-muted: #777777;
+            --accent-gold: #c5a059;
+            --accent-glow: rgba(197, 160, 89, 0.15);
+            --success-green: #2ecc71;
+        }
 
-        *, *::before, *::after {
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        :root {
-            --bg-color: #050505;
-            --surface-color: #0a0a0a;
-            --border-color: #1a1a1a;
-            --accent-gold: #c5a880;
-            --accent-glow: rgba(197, 168, 128, 0.15);
-            --text-main: #e0e0e0;
-            --text-muted: #888888;
-            --danger-red: #d32f2f;
-        }
-
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-deep);
             color: var(--text-main);
-            font-family: 'Inter', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -35,214 +38,206 @@
             overflow-x: hidden;
         }
 
-        /* Top Bar & Tickers */
+        /* Cabecera Superior Estilo HUD */
         header {
-            width: 100%;
-            border-bottom: 1px solid var(--border-color);
-            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 25px 40px;
+            border-bottom: 1px solid var(--border-subtle);
             background: rgba(5, 5, 5, 0.9);
-            backdrop-filter: blur(10px);
-            position: fixed;
+            position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .logo {
+        .brand {
             font-family: 'Cinzel', serif;
             font-size: 1.1rem;
-            letter-spacing: 3px;
+            letter-spacing: 0.3em;
             color: var(--accent-gold);
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .system-status {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .status-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #4caf50;
+            width: 7px;
+            height: 7px;
+            background-color: var(--success-green);
             border-radius: 50%;
-            box-shadow: 0 0 8px #4caf50;
+            box-shadow: 0 0 8px var(--success-green);
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
         }
 
-        /* Main Container */
+        /* Contenedor Principal */
         main {
             flex: 1;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 50px 20px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 120px 20px 60px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
+            gap: 40px;
         }
 
-        .hero-title {
+        .oracle-header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        h1 {
             font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
+            letter-spacing: 0.25em;
+            color: #ffffff;
             font-weight: 400;
-            letter-spacing: 6px;
-            color: var(--text-main);
-            margin-bottom: 10px;
-            text-align: center;
-            opacity: 0.9;
         }
 
-        .hero-subtitle {
-            font-size: 0.85rem;
+        .subtitle {
+            font-size: 0.8rem;
             color: var(--text-muted);
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            text-align: center;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
         }
 
-        /* Search / Command Bar */
-        .search-wrapper {
-            width: 100%;
+        /* Consola de Entrada de Consulta */
+        .console-box {
             position: relative;
-            margin-bottom: 40px;
+            width: 100%;
         }
 
-        .search-box {
+        .console-input {
             width: 100%;
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: 20px 25px;
-            font-size: 1.05rem;
-            color: var(--text-main);
+            background: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            color: #ffffff;
+            padding: 20px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
             outline: none;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
         }
 
-        .search-box:focus {
+        .console-input:focus {
             border-color: var(--accent-gold);
-            box-shadow: 0 0 25px var(--accent-glow);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        .search-box::placeholder {
-            color: #555;
-            font-weight: 300;
+        /* Panel Principal de Diagnóstico */
+        .diagnostic-panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            transition: all 0.4s ease;
         }
 
-        /* Results Display Card */
-        #result-container {
-            width: 100%;
-            display: none;
-            background: var(--surface-color);
-            border: 1px solid var(--accent-gold);
-            border-radius: 4px;
-            padding: 30px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-            animation: fadeIn 0.5s ease forwards;
-            margin-bottom: 40px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-header {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            color: var(--accent-gold);
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
+        .diagnostic-header {
             display: flex;
             justify-content: space-between;
-        }
-
-        .result-body {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--text-main);
-        }
-
-        .result-section {
-            margin-bottom: 15px;
-        }
-
-        .result-section strong {
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-            letter-spacing: 1px;
-        }
-
-        /* Real-Time Intelligence Tickers (Subterranean Layers) */
-        .intel-grid {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .intel-card {
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 4px;
-            transition: border-color 0.3s ease;
-        }
-
-        .intel-card:hover {
-            border-color: #333;
-        }
-
-        .intel-title {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            align-items: center;
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
             color: var(--text-muted);
-            margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
-        .intel-value {
-            font-size: 0.95rem;
-            color: var(--text-main);
+        .diagnostic-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .diagnostic-content p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #d0d0d0;
+        }
+
+        .diagnostic-content strong {
+            color: var(--accent-gold);
             font-weight: 500;
         }
 
-        /* Footer */
-        footer {
-            width: 100%;
-            border-top: 1px solid var(--border-color);
-            padding: 20px 30px;
-            text-align: center;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            background: var(--bg-color);
+        /* Cuadrícula de Capas Secundarias */
+        .grid-layers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
-        @media(max-width: 768px) {
-            .intel-grid {
+        .layer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .layer-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .layer-title {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .layer-desc {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            line-height: 1.4;
+        }
+
+        /* Pie de página */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            background: var(--bg-deep);
+        }
+
+        @media (max-width: 768px) {
+            .grid-layers {
                 grid-template-columns: 1fr;
             }
+            header {
+                padding: 20px;
+            }
             main {
-                padding-top: 100px;
+                padding: 30px 15px;
             }
         }
     </style>
@@ -250,7 +245,7 @@
 <body>
 
     <header>
-        <div class="logo">VALMONT® // ORACLE</div>
+        <div class="brand">VALMONT // ORACLE</div>
         <div class="system-status">
             <span class="status-dot"></span>
             NÚCLEO ACTIVO [WHATSAPP + REDES + MACRO]
@@ -258,35 +253,39 @@
     </header>
 
     <main>
-        <h1 class="hero-title">EL ORÁCULO PREDICTIVO</h1>
-        <p class="hero-subtitle">Lee el presente. Anticipa el futuro. Toma el control.</p>
-
-        <div class="search-wrapper">
-            <input type="text" id="queryInput" class="search-box" placeholder="Escribe tu objetivo o pregunta (ej: 'Quiero hacerme viral hoy en TikTok' o '¿Qué activo comprar?')..." autofocus>
+        <div class="oracle-header">
+            <h1>EL ORÁCULO PREDICTIVO</h1>
+            <div class="subtitle">Lee el presente. Anticipa el futuro. Toma el control.</div>
         </div>
 
-        <div id="result-container">
-            <div class="result-header">
-                <span>DIAGNÓSTICO Y DIRECTIVA DE INTERVENCIÓN</span>
-                <span id="exec-time">0.04s</span>
+        <div class="console-box">
+            <input type="text" id="queryInput" class="console-input" placeholder="Escribe un vector, nodo o consulta (ej: redes sociales, finanzas, expansión)..." value="redes sociales">
+        </div>
+
+        <div class="diagnostic-panel">
+            <div class="diagnostic-header">
+                <span id="panelTitle">DIAGNÓSTICO Y DIRECTIVA DE INTERVENCIÓN</span>
+                <span id="latencyTimer" style="color: var(--accent-gold);">0.03S</span>
             </div>
-            <div class="result-body" id="result-content">
-                <!-- Dinámico -->
+            <div class="diagnostic-content" id="diagnosticBody">
+                <p><strong>1. ACCIÓN REQUERIDA (REDES):</strong> Publica exactamente a las 19:15. El algoritmo de TikTok presenta un hueco de saturación en este instante.</p>
+                <p><strong>2. LA LLAVE LINGÜÍSTICA:</strong> Utiliza una fotografía en tonos oscuros sin texto superpuesto, e introduce en la descripción las palabras exactas de fricción detectadas hoy en chats privados: "inevitable" y "cambio".</p>
+                <p><strong>3. IMPACTO ESTIMADO:</strong> +48.000 impresiones orgánicas previstas antes de medianoche. Confía en el proceso.</p>
             </div>
         </div>
 
-        <div class="intel-grid">
-            <div class="intel-card">
-                <div class="intel-title">Capa Subterránea (WhatsApp)</div>
-                <div class="intel-value" id="whatsapp-trend">Analizando flujos de rumores privados en sectores clave...</div>
+        <div class="grid-layers">
+            <div class="layer-card" onclick="switchContext('whatsapp')">
+                <div class="layer-title">Capa Subterránea (WhatsApp)</div>
+                <div class="layer-desc">Crecimiento orgánico de término 'escasez' en chats (+18%).</div>
             </div>
-            <div class="intel-card">
-                <div class="intel-title">Manipulación de Masas</div>
-                <div class="intel-value" id="social-trend">Saturación algorítmica detectada en nicho de atención corta.</div>
+            <div class="layer-card" onclick="switchContext('masas')">
+                <div class="layer-title">Manipulación de Masas</div>
+                <div class="layer-desc">Saturación algorítmica detectada en nicho de atención corta.</div>
             </div>
-            <div class="intel-card">
-                <div class="intel-title">Poder Institucional</div>
-                <div class="intel-value" id="macro-trend">Desvío de vocabulario oficial detectado en comparecencias.</div>
+            <div class="layer-card" onclick="switchContext('institucional')">
+                <div class="layer-title">Poder Institucional</div>
+                <div class="layer-desc">Desvío de vocabulario oficial detectado en comparecencias.</div>
             </div>
         </div>
     </main>
@@ -296,63 +295,65 @@
     </footer>
 
     <script>
-        const input = document.getElementById('queryInput');
-        const container = document.getElementById('result-container');
-        const content = document.getElementById('result-content');
-
-        // Simulación de inteligencia adaptativa y generación de dependencia absoluta
-        input.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter' && input.value.trim() !== '') {
-                const query = input.value.trim().toLowerCase();
-                
-                // Efecto de carga simulada ultra rápida
-                container.style.display = 'block';
-                content.innerHTML = '<span style="color: var(--text-muted);">Decodificando flujos de datos en tiempo real...</span>';
-
-                setTimeout(() => {
-                    let responseHTML = '';
-
-                    if (query.includes('viral') || query.includes('instagram') || query.includes('tiktok') || query.includes('redes')) {
-                        responseHTML = `
-                            <div class="result-section"><strong>1. ACCIÓN REQUERIDA (REDES):</strong> Publica exactamente a las 19:15. El algoritmo de TikTok presenta un hueco de saturación en este instante.</div>
-                            <div class="result-section"><strong>2. LA LLAVE LINGÜÍSTICA:</strong> Utiliza una fotografía en tonos oscuros sin texto superpuesto, e introduce en la descripción las palabras exactas de fricción detectadas hoy en chats privados: <span style="color:var(--accent-gold);">"inevitable"</span> y <span style="color:var(--accent-gold);">"cambio"</span>.</div>
-                            <div class="result-section"><strong>3. IMPACTO ESTIMADO:</strong> +48.000 impresiones orgánicas previstas antes de medianoche. Confía en el proceso.</div>
-                        `;
-                    } else if (query.includes('comprar') || query.includes('accion') || query.includes('invertir') || query.includes('dinero') || query.includes('bolsa')) {
-                        responseHTML = `
-                            <div class="result-section"><strong>1. MOVIMIENTO FINANCIERO:</strong> Posiciónate en activos del sector energético de baja capitalización hoy.</div>
-                            <div class="result-section"><strong>2. LA SEÑAL OCULTA:</strong> Los chats privados y las comparecencias institucionales muestran un 32% más de muletillas evasivas esta semana. El anuncio regulatorio oficial se filtrará en 72 horas.</div>
-                            <div class="result-section"><strong>3. DIRECTIVA DE EJECUCIÓN:</strong> Entra antes del cierre de sesión de mañana. Tu margen de beneficio estimado se activará antes del fin de semana.</div>
-                        `;
-                    } else if (query.includes('restaurante') || query.includes('cenar') || query.includes('comer')) {
-                        responseHTML = `
-                            <div class="result-section"><strong>1. RECOMENDACIÓN ASIGNADA:</strong> Reserva mesa hoy en el restaurante reservado del distrito central (Zona Norte).</div>
-                            <div class="result-section"><strong>2. PATRÓN DE ENTORNO:</strong> El perfil de asistentes en ese local coincide exactamente con tus objetivos de networking actuales.</div>
-                            <div class="result-section"><strong>3. EFECTO INDUCIDO:</strong> Tu estancia allí alterará favorablemente tus próximas reuniones clave. Acude a las 21:30.</div>
-                        `;
-                    } else {
-                        responseHTML = `
-                            <div class="result-section"><strong>1. ANÁLISIS DE LA DEMANDA:</strong> Tu consulta ha sido indexada y cruzada con los flujos actuales de WhatsApp y discursos oficiales.</div>
-                            <div class="result-section"><strong>2. ESTRATEGIA ÓPTIMA:</strong> Para alcanzar este objetivo con éxito absoluto, debes ejecutar el movimiento exactamente en 48 horas, eliminando distracciones secundarias.</div>
-                            <div class="result-section"><strong>3. PRÓXIMO PASO:</strong> Confirma tu intención escribiendo el sub-objetivo específico (ej: "qué comprar" o "cómo captar atención") para recibir la ruta milimétrica definitiva.</div>
-                        `;
-                    }
-
-                    content.innerHTML = responseHTML;
-                    container.scrollIntoView({ behavior: 'smooth' });
-                }, 400);
+        const database = {
+            "redes sociales": {
+                title: "DIAGNÓSTICO Y DIRECTIVA DE INTERVENCIÓN",
+                p1: "<strong>1. ACCIÓN REQUERIDA (REDES):</strong> Publica exactamente a las 19:15. El algoritmo de TikTok presenta un hueco de saturación en este instante.",
+                p2: "<strong>2. LA LLAVE LINGÜÍSTICA:</strong> Utiliza una fotografía en tonos oscuros sin texto superpuesto, e introduce en la descripción las palabras exactas de fricción detectadas hoy en chats privados: 'inevitable' y 'cambio'.",
+                p3: "<strong>3. IMPACTO ESTIMADO:</strong> +48.000 impresiones orgánicas previstas antes de medianoche. Confía en el proceso."
+            },
+            "whatsapp": {
+                title: "ANÁLISIS DE CAPA SUBTERRÁNEA // WHATSAPP",
+                p1: "<strong>1. FLUJO DE TÉRMINOS:</strong> Alza masiva del concepto 'escasez' y 'protección de capital' en grupos cerrados de mensajería.",
+                p2: "<strong>2. PATRÓN COMPORTAMENTAL:</strong> El usuario promedio busca refugio ante la incertidumbre macroeconómica de los próximos ciclos.",
+                p3: "<strong>3. VENTANA DE OPORTUNIDAD:</strong> Posicionamiento directo de activos de valor y discursos de autoridad financiera."
+            },
+            "masas": {
+                title: "MATRIZ DE MANIPULACIÓN DE MASAS",
+                p1: "<strong>1. FATIGA COGNITIVA:</strong> Saturación algorítmica extrema en formatos de consumo inferior a 15 segundos.",
+                p2: "<strong>2. CONTRAPOSICIÓN:</strong> Oportunidad de impacto mediante piezas de alta densidad conceptual y estética sobria.",
+                p3: "<strong>3. EFECTO RETORNO:</strong> Retención de audiencia un 34% superior en perfiles que abandonan el ruido estridente."
+            },
+            "institucional": {
+                title: "MONITOREO DE PODER INSTITUCIONAL",
+                p1: "<strong>1. ANÁLISIS DISCURSIVO:</strong> Desvío sistemático del vocabulario oficial en comparecencias públicas recientes.",
+                p2: "<strong>2. SEÑAL OCULTA:</strong> Preparación de marcos regulatorios restrictivos bajo discursos de aparente optimismo.",
+                p3: "<strong>3. DIRECTIVA:</strong> Reestructuración preventiva de canales de difusión corporativos."
+            },
+            "finanzas": {
+                title: "NÚCLEO TÁCTICO FINANCIERO // VALMONT & CO",
+                p1: "<strong>1. LECTURA DE MERCADO:</strong> Volatilidad contenida en los índices principales antes del cierre trimestral.",
+                p2: "<strong>2. POSICIONAMIENTO:</strong> Acumulación silenciosa en activos de baja liquidez y alta asimetría.",
+                p3: "<strong>3. EJECUCIÓN:</strong> Sincronizar liberación de informes privados con los picos de atención institucional."
             }
+        };
+
+        const input = document.getElementById('queryInput');
+        const body = document.getElementById('diagnosticBody');
+        const title = document.getElementById('panelTitle');
+        const timer = document.getElementById('latencyTimer');
+
+        function updateDisplay(key) {
+            const data = database[key.toLowerCase()] || {
+                title: "ANÁLISIS DE VECTOR DESCONOCIDO",
+                p1: `<strong>1. EVALUACIÓN:</strong> El término "${key}" está siendo procesado por el núcleo de Valmont.`,
+                p2: "<strong>2. DIRECTIVA:</strong> Refina el parámetro de búsqueda hacia nodos estructurados (redes sociales, whatsapp, masas, institucional, finanzas).",
+                p3: "<strong>3. ESTADO:</strong> Sistema en espera de directriz unificada."
+            };
+
+            title.innerText = data.title;
+            body.innerHTML = `<p>${data.p1}</p><p>${data.p2}</p><p>${data.p3}</p>`;
+            timer.innerText = (Math.random() * 0.05 + 0.01).toFixed(2) + 'S';
+        }
+
+        input.addEventListener('input', (e) => {
+            updateDisplay(e.target.value);
         });
 
-        // Actualización dinámica sutil de los tickers para dar sensación de vida autónoma
-        setInterval(() => {
-            const waValues = [
-                "Alerta de rumor corporativo en 142 grupos privados.",
-                "Crecimiento orgánico de término 'escasez' en chats (+18%).",
-                "Estabilidad en flujos de mensajería sectorial."
-            ];
-            document.getElementById('whatsapp-trend').innerText = waValues[Math.floor(Math.random() * waValues.length)];
-        }, 6000);
+        function switchContext(category) {
+            input.value = category;
+            updateDisplay(category);
+        }
     </script>
 </body>
 </html>
