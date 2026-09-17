@@ -116,7 +116,6 @@
             text-transform: uppercase;
         }
 
-        /* Selector de Idiomas / Módulos */
         .selector-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -144,7 +143,6 @@
             box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        /* Consola de Estímulo Subconsciente (El Hack) */
         .stimulus-box {
             background: var(--bg-panel);
             border: 1px solid var(--border-subtle);
@@ -182,7 +180,6 @@
             letter-spacing: 0.15em;
         }
 
-        /* Controles de Reproducción */
         .control-panel {
             display: flex;
             gap: 15px;
@@ -218,7 +215,6 @@
             border-color: var(--accent-gold);
         }
 
-        /* Barra de Progreso Neural */
         .progress-track {
             width: 100%;
             height: 3px;
@@ -372,7 +368,7 @@
             toggleBtn.style.background = "var(--danger-red)";
             intervalTimer = setInterval(() => {
                 nextStimulus();
-            }, 4000); // Rota cada 4 segundos para saturación subconsciente óptima
+            }, 4000);
         }
 
         function stopEngine() {
